@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cstring>
+#define MAX 100
+
+using namespace std;
+
+int n;
+
+struct Traducao{
+    char ingles[MAX];
+    char port[MAX];
+};
+
+void traduzPalavra(char s[], Traducao p[]);
+
+int main(){
+    char str[MAX];
+
+    cout << "Digite a quantidade de palavras que deseja cadastrar: ";
+    cin >> n;
+    cin.ignore();
+
+    Traducao palavra[n];
+
+    for (int i = 0; i < n; i++){
+        cout << "Digite a palavra em ingles para cadastro: ";
+        cin.getline(palavra[i].ingles, MAX);
+        cout << "Digite a sua traducao: ";
+        cin.getline(palavra[i].port, MAX);
+    }
+
+    do{
+        cout << "Digite uma palavra que deseja a traducao: ";
+        cin.getline(str, MAX);
+        traduzPalavra(str, palavra);
+    }while(strcmp("encerrar agora", str) != 0);
+
+    return 0;
+}
+
+void traduzPalavra(char s[], Traducao p[]){
+    int j = 0;
+    for (int i = 0; i < n; i++){
+        if (strcmp(s,p[i].ingles) == 0){
+            cout << "A palavra " << s << " esta em ingles e a sua traducao e " << p[i].port << endl;
+            j++;
+        }
+        else if (strcmp(s,p[i].port) == 0){
+            cout << "A palavra " << s << " esta em portugues e a sua traducao e " << p[i].ingles << endl;
+            j++;
+        }
+    }
+    if (strcmp(s,"encerrar agora") == 0){
+
+    }
+    else if (j == 0){
+        cout << "Palavra nao cadastrada" << endl;
+    }
+}
